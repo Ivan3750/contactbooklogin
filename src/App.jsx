@@ -1,6 +1,6 @@
-// App.jsx
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import Navigation from "./components/Navigation";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
@@ -8,22 +8,24 @@ import ContactsPage from "./pages/ContactsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { getCurrentUser } from "./services/api";
 
-
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const userData = await getCurrentUser(token);
-          setUser(userData);
-        } catch (error) {
-          console.error("Unauthorized", error);
-        }
+      if (!token) return;
+
+      try {
+        const userData = await getCurrentUser(token);
+        setUser(userData);
+      } catch (error) {
+        console.error("помилка", error);
+        localStorage.removeItem("token");
+        setUser(null);
       }
     };
+
     fetchUser();
   }, []);
 
