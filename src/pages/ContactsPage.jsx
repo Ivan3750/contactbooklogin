@@ -1,10 +1,11 @@
+import React from 'react';
 import ContactForm from "../components/ContactForm";
 import ContactList from "../components/ContactList";
 import Filter from "../components/Filter";
 
 
 
-export const App = () => {
+export const ContactsPage = () => {
   return (
       <section>
     <div className="border rounded-md w-[500px] h-[500px] mx-auto my-10 p-8">
@@ -17,4 +18,4 @@ export const App = () => {
     </section>
   );
 };
-export default App
+export default ContactsPage

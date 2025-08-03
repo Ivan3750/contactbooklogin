@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteContact, fetchContacts } from "../redux/contactsSlice";
-import { MdAccountCircle } from "react-icons/md";
-import {selectFilter, selectItems} from "../redux/selectors"
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact, fetchContacts } from '../redux/contactsSlice';
+import { MdAccountCircle } from 'react-icons/md';
+import { selectFilter, selectItems } from '../redux/selectors';
 const ContactList = () => {
   const { items, isLoading, error } = useSelector(selectItems);
   const filterValue = useSelector(selectFilter);
-  console.log(items, filterValue)
+  console.log(items, filterValue);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const ContactList = () => {
   );
 
   if (isLoading) return <p>Завантаження...</p>;
-if (error) return <p className="text-red-500">Помилка: {error}</p>;
+  if (error) return <p className="text-red-500">Помилка: {error}</p>;
 
   return (
     <ul className="space-y-3 mt-4">

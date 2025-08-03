@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../redux/contactsSlice";
-import { selectItems } from "../redux/selectors";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../redux/contactsSlice';
+import { selectItems } from '../redux/selectors';
 
 const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const { items } = useSelector(selectItems)
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const { items } = useSelector(selectItems);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const isExist = items.some(contact => contact.name.toLowerCase() === name.toLowerCase());
+    const isExist = items.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
     if (isExist) {
       alert(`${name} вже є у контактах`);
       return;
     }
 
-dispatch(addContact({ name, number: phone }));
+    dispatch(addContact({ name, number: phone }));
 
-    setName("");
-    setPhone("");
+    setName('');
+    setPhone('');
   };
 
   return (
@@ -40,8 +42,10 @@ dispatch(addContact({ name, number: phone }));
         placeholder="Номер телефону"
         required
         type="tel"
-        className="border border-gray-300 rounded-md p-2  "
+        title="Введіть коректний номер телефону"
+        className="border border-gray-300 rounded-md p-2"
       />
+
       <button
         type="submit"
         className="rounded-md bg-green-500 hover:bg-green-600 text-white py-2 transition"
