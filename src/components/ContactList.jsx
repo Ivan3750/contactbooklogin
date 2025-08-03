@@ -17,8 +17,8 @@ const ContactList = () => {
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
-  if (isLoading) return <p>Loading contacts...</p>;
-if (error) return <p className="text-red-500">Error: {error}</p>;
+  if (isLoading) return <p>Завантаження...</p>;
+if (error) return <p className="text-red-500">Помилка: {error}</p>;
 
   return (
     <ul className="space-y-3 mt-4">
