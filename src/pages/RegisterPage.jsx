@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/api";
-import PropTypes from "prop-types";
 
 const RegisterPage = ({ setUser }) => {
   const [name, setName] = useState("");

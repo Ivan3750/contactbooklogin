@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { logoutUser } from "../services/api";
 
 const UserMenu = ({ email, setUser }) => {
