@@ -1,4 +1,3 @@
-import React from "react";
 import { logoutUser } from "../services/api";
 
 const UserMenu = ({ email, setUser }) => {
