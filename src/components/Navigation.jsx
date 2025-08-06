@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const Navigation = ({ user, setUser }) => {
   const handleLogout = () => {
-    setUser(null);
+    setUser(null)
     localStorage.token = ""
-  };
+  }
 
   return (
     <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
@@ -48,9 +47,9 @@ const Navigation = ({ user, setUser }) => {
         )}
       </div>
     </nav>
-  );
-};
+  )
+}
 
 
 
-export default Navigation;
+export default Navigation

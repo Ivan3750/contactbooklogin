@@ -1,25 +1,34 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/api";
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom"
+import { registerUser } from "../services/api"
 
 const RegisterPage = ({ setUser }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [error, setError] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await registerUser({ name, email, password });
-      localStorage.setItem("token", data.token);
-      setUser(data.user);
-      navigate("/contacts");
-    } catch (err) {
-      alert("Register failed!");
-      console.error(err);
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setError("")
+
+  try {
+    const data = await registerUser({ name, email, password })
+    localStorage.setItem("token", data.token)
+    setUser(data.user)
+    navigate("/contacts")
+  } catch (err) {
+    console.log(err)
+    if (err.code === 11000) {
+      setError("Ця електронна пошта вже використовується.")
+    } else {
+      setError("Помилка реєстрації. Спробуйте ще раз.")
     }
-  };
+  }
+}
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -31,13 +40,17 @@ const RegisterPage = ({ setUser }) => {
           Реєстрація
         </h2>
 
+        {error && (
+          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+        )}
+
         <input
           type="text"
           placeholder="Ім'я"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg "
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg"
         />
 
         <input
@@ -46,7 +59,7 @@ const RegisterPage = ({ setUser }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg "
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg"
         />
 
         <input
@@ -55,9 +68,9 @@ const RegisterPage = ({ setUser }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full px-4 py-2 mb-6 border border-gray-300 rounded-lg "
+          className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-lg"
         />
-
+        <p className="text-grey-500 text-sm mb-6 ">Пароль повинен містити мінімум 8 символів включаючи 1 малу букву і 1 велику букву і 1 спеціальний символ</p>
         <button
           type="submit"
           className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
@@ -66,8 +79,7 @@ const RegisterPage = ({ setUser }) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-
-export default RegisterPage;
+export default RegisterPage

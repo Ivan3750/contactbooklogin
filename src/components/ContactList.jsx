@@ -1,24 +1,34 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, fetchContacts } from '../redux/contactsSlice';
-import { MdAccountCircle } from 'react-icons/md';
-import { selectFilter, selectItems } from '../redux/selectors';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteContact, fetchContacts } from '../redux/contactsSlice'
+import { MdAccountCircle } from 'react-icons/md'
+import { selectFilter, selectItems } from '../redux/selectors'
+
 const ContactList = () => {
-  const { items, isLoading, error } = useSelector(selectItems);
-  const filterValue = useSelector(selectFilter);
-  console.log(items, filterValue);
-  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(selectItems)
+  const filterValue = useSelector(selectFilter)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    dispatch(fetchContacts())
+  }, [dispatch])
 
   const filtered = items.filter(contact =>
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
-  );
+  )
 
-  if (isLoading) return <p>Завантаження...</p>;
-  if (error) return <p className="text-red-500">Помилка: {error}</p>;
+  if (isLoading) return <p>Завантаження...</p>
+  if (error) return <p className="text-red-500">Помилка: {error}</p>
+
+  if (filtered.length === 0) {
+    return (
+      <p className="text-gray-600 mt-4 text-center">
+        {items.length === 0
+          ? 'У вас ще немає контактів.'
+          : 'Жоден контакт не відповідає пошуку.'}
+      </p>
+    )
+  }
 
   return (
     <ul className="space-y-3 mt-4">
@@ -38,12 +48,12 @@ const ContactList = () => {
             className="bg-red-500 hover:bg-red-600 transition text-white rounded-full px-4 py-1 text-sm font-medium"
             onClick={() => dispatch(deleteContact(id))}
           >
-            Delete
+            Видалити
           </button>
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default ContactList;
+export default ContactList
