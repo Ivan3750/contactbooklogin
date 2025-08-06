@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/contactbooklogin/static/css/main.752d1b4f.css",
-    "main.js": "/contactbooklogin/static/js/main.6db0a646.js",
+    "main.css": "/contactbooklogin/static/css/main.4ec0016d.css",
+    "main.js": "/contactbooklogin/static/js/main.183bbd6b.js",
     "index.html": "/contactbooklogin/index.html",
-    "main.752d1b4f.css.map": "/contactbooklogin/static/css/main.752d1b4f.css.map",
-    "main.6db0a646.js.map": "/contactbooklogin/static/js/main.6db0a646.js.map"
+    "main.4ec0016d.css.map": "/contactbooklogin/static/css/main.4ec0016d.css.map",
+    "main.183bbd6b.js.map": "/contactbooklogin/static/js/main.183bbd6b.js.map"
   },
   "entrypoints": [
-    "static/css/main.752d1b4f.css",
-    "static/js/main.6db0a646.js"
+    "static/css/main.4ec0016d.css",
+    "static/js/main.183bbd6b.js"
   ]
 }
